@@ -7,12 +7,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static String DATABASE_NAME = "dbnoteapp";
     private static final int DATABASE_VERSION = 1;
-    private static final String SQL_CREATE_TABLE_NOTE = String.format("CREATE TABLE %s"
+    private static final String SQL_CREATE_TABLE_NAME = String.format("CREATE TABLE %s"
                     + " (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
-            DatabaseContract.TABLE_NOTE,
+            DatabaseContract.NoteColumns.TABLE_NAME,
             DatabaseContract.NoteColumns._ID,
             DatabaseContract.NoteColumns.TITLE,
             DatabaseContract.NoteColumns.DESCRIPTION,
@@ -25,12 +25,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_TABLE_NOTE);
+        db.execSQL(SQL_CREATE_TABLE_NAME);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseContract.TABLE_NOTE);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseContract.NoteColumns.TABLE_NAME);
         onCreate(db);
     }
 }
